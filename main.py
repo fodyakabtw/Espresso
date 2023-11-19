@@ -18,8 +18,6 @@ class Espresso(QMainWindow):
 
         self.cof = self.cur.execute("""SELECT * FROM coffee""").fetchall()
 
-        print(self.cof)
-
         self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.tableWidget.verticalHeader().setDefaultSectionSize(20)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(40)
