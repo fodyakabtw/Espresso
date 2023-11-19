@@ -7,11 +7,11 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>651</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Список кофе</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTableWidget" name="tableWidget">
@@ -58,6 +58,19 @@
       <string>объем упаковки</string>
      </property>
     </column>
+   </widget>
+   <widget class="QPushButton" name="add_or_change">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>560</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Добавить/Изменить данные</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
