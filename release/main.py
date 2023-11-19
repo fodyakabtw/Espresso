@@ -1,17 +1,18 @@
 import sqlite3
 import sys
+from spisok_coffee import Ui_spisok_coffee
+from addEditCoffeeForm import Ui_MainWindow
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QHeaderView, QTableWidgetItem
-from PyQt5 import uic
 
-conn = sqlite3.connect('coffee.sqlite')
+conn = sqlite3.connect('data/coffee.sqlite')
 cursor = conn.cursor()
 
 
-class Espresso(QMainWindow):
+class Espresso(QMainWindow, Ui_spisok_coffee):
     def __init__(self):
         super().__init__()
-        uic.loadUi('main.ui', self)
+        self.setupUi(self)
 
         self.con = sqlite3.connect('coffee.sqlite')
         self.cur = self.con.cursor()
@@ -42,10 +43,10 @@ class Espresso(QMainWindow):
         self.second_window.show()
 
 
-class Kapuchino(QMainWindow):
+class Kapuchino(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
-        uic.loadUi('addEditCoffeeForm.ui', self)
+        self.setupUi(self)
         self.spisok = set()
 
         self.add_button.clicked.connect(self.add)
@@ -95,6 +96,7 @@ class Kapuchino(QMainWindow):
                     self.statusBar().showMessage('Айди, цена или объем не может быть текстом!')
             else:
                 self.statusBar().showMessage('Кофе с таким сортом уже есть!')
+                print(self.spisok)
                 return
 
     def change(self):
@@ -121,7 +123,6 @@ class Kapuchino(QMainWindow):
             return
         else:
             try:
-                self.spisok.add(self.sort2_edit.text())
                 self.con = sqlite3.connect('coffee.sqlite')
                 self.cur = self.con.cursor()
                 if self.sort2_edit.text() not in self.spisok:
@@ -137,6 +138,7 @@ class Kapuchino(QMainWindow):
                     self.con.close()
                 else:
                     self.statusBar().showMessage('Кофе с таким сортом уже существует!')
+                    print(self.spisok)
             except ValueError:
                 self.statusBar().showMessage('Айди, цена или объем не может быть текстом!')
 
