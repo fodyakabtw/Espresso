@@ -5,7 +5,7 @@ from addEditCoffeeForm import Ui_MainWindow
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QHeaderView, QTableWidgetItem
 
-conn = sqlite3.connect('data/coffee.sqlite')
+conn = sqlite3.connect('coffee.sqlite')
 cursor = conn.cursor()
 
 
@@ -48,9 +48,7 @@ class Kapuchino(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.spisok = set()
-
         self.add_button.clicked.connect(self.add)
-
         self.change_button.clicked.connect(self.change)
 
     def add(self):
@@ -82,7 +80,8 @@ class Kapuchino(QMainWindow, Ui_MainWindow):
                     self.con = sqlite3.connect('coffee.sqlite')
                     self.cur = self.con.cursor()
                     self.cur.execute(
-                        """INSERT INTO coffee (ID, sort_name, roast_degree, ground_or_whole, taste_description, price, package_volume) VALUES (?, ?, ?, ?, ?, ?, ?)""",
+                        """INSERT INTO coffee (ID, sort_name, roast_degree, ground_or_whole, taste_description, 
+                        price, package_volume) VALUES (?, ?, ?, ?, ?, ?, ?)""",
                         (int(self.id1_edit.text()), self.sort1_edit.text(), self.obj1_edit.text(),
                          self.zern1_edit.text(),
                          self.opis1_edit.text(), int(self.price1_edit.text()), int(self.v1_edit.text()),))
@@ -127,7 +126,8 @@ class Kapuchino(QMainWindow, Ui_MainWindow):
                 self.cur = self.con.cursor()
                 if self.sort2_edit.text() not in self.spisok:
                     self.cur.execute(
-                        """UPDATE coffee SET sort_name = ?, roast_degree = ?, ground_or_whole = ?, taste_description = ?, price = ?, package_volume = ? WHERE ID = ?""",
+                        """UPDATE coffee SET sort_name = ?, roast_degree = ?, ground_or_whole = ?, 
+                        taste_description = ?, price = ?, package_volume = ? WHERE ID = ?""",
                         (self.sort2_edit.text(), self.obj2_edit.text(),
                          self.zern2_edit.text(),
                          self.opis2_edit.text(), int(self.price2_edit.text()), int(self.v2_edit.text()),
